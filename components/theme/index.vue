@@ -1,10 +1,8 @@
 <template>
-  <main :class="[theme === 'dark' ? 'dark' : null]">
-    <slot />
-  </main>
+  <slot />
 </template>
 
 <script lang="ts" setup>
 import { provideTheme } from "./theme-context";
-const { theme } = provideTheme();
+provideTheme();
 </script>

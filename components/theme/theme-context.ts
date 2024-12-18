@@ -10,10 +10,18 @@ export const provideTheme = () => {
   const theme = ref<Theme>("light");
   const setTheme = (_theme: Theme) => {
     theme.value = _theme;
+    if (import.meta.client) {
+      if (theme.value === "dark") document.body.classList.add("dark");
+      if (theme.value === "light") document.body.classList.remove("dark");
+    }
   };
 
   const toggleTheme = () => {
     theme.value = theme.value === "dark" ? "light" : "dark";
+    if (import.meta.client) {
+      if (theme.value === "dark") document.body.classList.add("dark");
+      if (theme.value === "light") document.body.classList.remove("dark");
+    }
   };
 
   provide(themeKey, { theme, setTheme, toggleTheme });

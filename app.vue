@@ -1,7 +1,7 @@
 <template>
   <ConfigProvider :use-id="useIdFunction">
     <Theme>
-      <div class="fixed left-0 right-0 z-[100] bg-background">
+      <div class="fixed left-0 right-0 z-[100] border-b bg-background">
         <Navigation />
       </div>
       <section class="pt-[70px]">
