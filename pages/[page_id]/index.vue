@@ -12,13 +12,13 @@
             ></div>
           </div>
           <div
-            class="w-full max-w-[200px] mx-auto bg-foreground/5 border h-2 animate-pulse"
+            class="w-full max-w-[300px] mx-auto bg-foreground/5 h-2 animate-pulse"
           ></div>
         </div>
 
         <div v-else>
           <h1
-            class="text-4xl lg:text-5xl !leading-snug font-bold text-center max-w-[800px] mx-auto"
+            class="text-4xl lg:text-5xl text-white !leading-snug font-bold text-center max-w-[800px] mx-auto"
           >
             {{ blogDetails?.Name ?? "" }}
           </h1>
@@ -29,7 +29,7 @@
             <div>&bull;</div>
             <div>By {{ blogDetails?.Author?.[0] ?? "" }}</div>
             <div>&bull;</div>
-            <div>{{ timeAgo }}</div>
+            <div v-if="publishedDate">{{ timeAgo }}</div>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
     >
       <div
         :class="[
-          'w-full max-w-[980px] max-h-[380px] aspect-video mx-auto bg-accent/40 border',
+          'w-full max-w-[980px] max-h-[380px] aspect-video mx-auto bg-background/40',
           status === 'pending' ? 'animate-pulse' : null,
         ]"
       >
@@ -60,7 +60,7 @@
       >
         <Markdown :content="blockMd.parent" v-if="blockMd" />
       </article>
-      <div class="space-y-8" v-if="relatedPosts?.length">
+      <div class="space-y-8 mt-20" v-if="relatedPosts?.length">
         <h4 class="font-semibold text-4xl">Related Posts</h4>
         <RelatedPost :posts="relatedPosts" />
       </div>
@@ -92,12 +92,15 @@ const blogDetails = computed(() => {
   return getBlogDetails(data.value);
 });
 
+const publishedDate = computed(
+  () =>
+    blogDetails.value?.["Publish Date"] ??
+    blogDetails?.value?.created_time ??
+    null
+);
+
 const timeAgo = useTimeAgo(
-  blogDetails.value?.["Publish Date"] || blogDetails?.value?.created_time
-    ? new Date(
-        blogDetails.value?.["Publish Date"] ?? blogDetails?.value?.created_time
-      )
-    : new Date()
+  publishedDate?.value ? new Date(publishedDate.value) : ""
 );
 
 const relatedPosts = computed(

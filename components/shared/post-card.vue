@@ -26,11 +26,13 @@
       </div>
       <h3
         class="text-lg font-semibold max-h-14 overflow-hidden text-ellipsis line-clamp-2 my-4"
+        :title="post?.Name ?? ''"
       >
         {{ post?.Name ?? "" }}
       </h3>
       <p
         class="max-h-20 overflow-hidden text-ellipsis line-clamp-3 text-muted-foreground"
+        :title="post?.['Content Summary'] ?? ''"
       >
         {{ post?.["Content Summary"] ?? "" }}
       </p>

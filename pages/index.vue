@@ -2,7 +2,7 @@
   <div class="pb-[80px]">
     <div class="py-28 bg-primary text-background">
       <div class="container">
-        <div class="text-center space-y-6">
+        <div class="text-center space-y-6 text-white">
           <h1 class="text-4xl md:text-6xl font-bold">Redstone Blog</h1>
           <p class="text-xl md:text-2xl max-w-[650px] mx-auto">
             Finance, escrow, e-commerce and other information that keeps you on
