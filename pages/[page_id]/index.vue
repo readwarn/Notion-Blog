@@ -29,7 +29,9 @@
             <div>&bull;</div>
             <div>By {{ blogDetails?.Author?.[0] ?? "" }}</div>
             <div>&bull;</div>
-            <div v-if="publishedDate">{{ timeAgo }}</div>
+            <ClientOnly v-if="publishedDate">
+              <div>{{ timeAgo }}</div>
+            </ClientOnly>
           </div>
         </div>
       </div>
@@ -42,7 +44,7 @@
     >
       <div
         :class="[
-          'w-full max-w-[980px] max-h-[380px] aspect-video mx-auto bg-background/40',
+          'w-full max-w-[980px] max-h-[380px] aspect-video mx-auto bg-primary/80',
           status === 'pending' ? 'animate-pulse' : null,
         ]"
       >
@@ -96,11 +98,11 @@ const publishedDate = computed(
   () =>
     blogDetails.value?.["Publish Date"] ??
     blogDetails?.value?.created_time ??
-    null
+    new Date()
 );
 
 const timeAgo = useTimeAgo(
-  publishedDate?.value ? new Date(publishedDate.value) : ""
+  publishedDate?.value ? new Date(publishedDate.value) : new Date()
 );
 
 const relatedPosts = computed(
