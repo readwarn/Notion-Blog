@@ -15,28 +15,28 @@ export const getFieldValue = (field: Properties) => {
           )
         : [];
     case "rich_text":
-      return field.rich_text?.[0].plain_text ?? "";
+      return field?.rich_text?.[0]?.plain_text ?? "";
     case "title":
-      return field.title?.[0].plain_text ?? "";
+      return field?.title?.[0]?.plain_text ?? "";
     case "files": {
       const file = field.files?.[0];
       if (!file) return null;
       if (file.type === "external") {
-        return file.external.url;
+        return file?.external?.url;
       }
       if (file.type === "file") {
-        return file.file.url;
+        return file?.file?.url;
       }
       return null;
     }
     case "select":
-      return field.select?.name ?? null;
+      return field?.select?.name ?? null;
     case "multi_select":
       return field.multi_select.map((item) => item.name);
     case "status":
       return field.status?.name ?? null;
     case "number":
-      return field.number;
+      return field?.number;
     case "date":
       return field.date?.start ?? null;
     case "relation":
