@@ -13,11 +13,17 @@
       <div class="flex items-center gap-2 text-sm text-muted-foreground mt-4">
         <div>{{ publishedDate }}</div>
         <div>|</div>
-        <div class="overflow-hidden text-ellipsis line-clamp-1 max-w-[120px]">
+        <div
+          class=""
+          :class="[
+            'overflow-hidden text-ellipsis line-clamp-1 ',
+            post['Read Time'] ? 'max-w-[120px]' : 'max-w-[170px]',
+          ]"
+        >
           by {{ post.Author?.[0] }}
         </div>
-        <div>|</div>
-        <div>
+        <div v-if="post['Read Time']">|</div>
+        <div v-if="post['Read Time']">
           {{
             post["Read Time"] && post["Read Time"] < 1
               ? "a min"

@@ -1,7 +1,8 @@
 <template>
   <header class="relative flex items-center py-4 container">
     <NuxtLink to="/">
-      <NuxtImg src="/images/redstone-head.svg" />
+      <NuxtImg src="/images/redstone.png" v-if="theme === 'dark'" />
+      <NuxtImg src="/images/redstone-light.png" v-else />
     </NuxtLink>
     <nav></nav>
     <Button
