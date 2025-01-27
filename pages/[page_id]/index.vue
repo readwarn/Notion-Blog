@@ -47,10 +47,22 @@
           'w-full max-w-[980px] max-h-[380px] aspect-video mx-auto bg-primary/80',
           status === 'pending' ? 'animate-pulse' : null,
         ]"
+        v-if="
+          blogDetails?.page_cover ||
+          blogDetails?.['Featured Image'] ||
+          status === 'pending'
+        "
       >
         <NuxtImg
-          :src="blogDetails?.page_cover"
-          v-if="blogDetails?.page_cover && status !== 'pending'"
+          :src="
+            blogDetails?.page_cover ??
+            blogDetails?.['Featured Image'] ??
+            undefined
+          "
+          v-if="
+            (blogDetails?.page_cover || blogDetails?.['Featured Image']) &&
+            status !== 'pending'
+          "
           class="w-full h-full object-cover"
         />
       </div>
@@ -101,8 +113,8 @@ const publishedDate = computed(
     new Date()
 );
 
-const timeAgo = useTimeAgo(
-  publishedDate?.value ? new Date(publishedDate.value) : new Date()
+const timeAgo = computed(() =>
+  useTimeAgo(publishedDate?.value ? new Date(publishedDate.value) : new Date())
 );
 
 const relatedPosts = computed(
