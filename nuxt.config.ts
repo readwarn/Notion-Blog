@@ -9,6 +9,25 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
   ],
 
+  app: {
+    head: {
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-664FPJFFMP",
+          async: true,
+        },
+        {
+          innerHTML: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-664FPJFFMP');`,
+          type: "text/javascript",
+        },
+      ],
+    },
+  },
+
   runtimeConfig: {
     public: {
       NOTION_DB: process.env.NOTION_DB,
